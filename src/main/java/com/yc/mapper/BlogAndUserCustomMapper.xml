@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.mapper.BlogAndUserCustomMapper">
+    <resultMap id="blogAndUserCustom" type="com.yc.model.BlogAndUserCustom" extends="com.yc.mapper.UserMapper.baseColumn">
+        <id column="blog_id" property="blogId"/>
+        <result column="blog_title" property="title"/>
+        <result column="blog_content" property="content"/>
+        <result column="blog_pics" property="pics"/>
+        <result column="blog_time" property="publishTime"/>
+        <result column="blog_type" property="type"/>
+        <result column="blog_read_num" property="readNum"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+    
+    <select id="getTenBlogAndUser" resultMap="blogAndUserCustom">
+        select * from blog, blog_user where blog.user_id=blog_user.user_id limit 0,10
+    </select>
+
+    <select id="getTenBlogAndUserByType" resultMap="blogAndUserCustom" parameterType="string">
+        select * from blog, blog_user where blog.user_id=blog_user.user_id and blog_type=#{type} limit 0,10
+    </select>
+
+    <select id="getAllBlogByUserId" parameterType="integer" resultMap="blogAndUserCustom">
+        select * from blog, blog_user where blog.user_id=#{userId} and blog.user_id=blog_user.user_id
+    </select>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.mapper.UserMapper">
+
+    <resultMap id="baseColumn" type="com.yc.model.User">
+        <id column="user_id" property="id"/>
+        <result column="user_account" property="account"/>
+        <result column="user_password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="user_name" property="name"/>
+        <result column="user_signature" property="signature"/>
+        <result column="user_headpic" property="headPic"/>
+        <result column="user_time" property="time"/>
+    </resultMap>
+
+    <select id="getUserByAccount" parameterType="string" resultMap="baseColumn">
+        select * from blog_user where user_account=#{account}
+    </select>
+
+    <insert id="insertUser" parameterType="com.yc.model.User">
+        insert into blog_user(user_account, user_password, salt, user_signature, user_headpic, user_time, user_name)
+        VALUES (#{account},#{password},#{salt},#{signature},#{headPic},#{time},#{name})
+    </insert>
+
+    <update id="updateUser" parameterType="com.yc.model.User">
+        update blog_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="password != null">user_password=#{password},</if>
+            <if test="salt != null">salt=#{salt},</if>
+            <if test="name != null">user_name=#{name},</if>
+            <if test="signature != null">user_signature=#{signature},</if>
+            <if test="headPic != null">user_headpic=#{headPic}</if>
+        </trim>
+        where user_id=#{id}
+    </update>
+
+
+</mapper>

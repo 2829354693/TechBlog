@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.mapper.BlogMapper">
+    <resultMap id="baseColumn" type="com.yc.model.Blog">
+        <id column="blog_id" property="id"/>
+        <result column="blog_title" property="title"/>
+        <result column="blog_content" property="content"/>
+        <result column="blog_pics" property="pics"/>
+        <result column="blog_time" property="time"/>
+        <result column="blog_type" property="type"/>
+        <result column="blog_read_num" property="readNum"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+
+    <insert id="insertBlog" parameterType="com.yc.model.Blog">
+        insert into blog(blog_title, blog_content, blog_pics, blog_time, blog_type, blog_read_num, user_id)
+        VALUES (#{title},#{content},#{pics},#{time},#{type},#{readNum},#{userId})
+    </insert>
+
+    <select id="getBlogByBlogId" parameterType="integer" resultMap="baseColumn">
+        select * from blog where blog_id=#{blogId}
+    </select>
+
+    <update id="updateBlogReadNum" parameterType="integer">
+        update blog set blog_read_num=blog_read_num+1 where blog_id=#{blogId}
+    </update>
+</mapper>
