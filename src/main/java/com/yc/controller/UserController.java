@@ -59,6 +59,7 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/logout")
     public String logout(HttpSession session) throws Exception{
         session.removeAttribute("user");
