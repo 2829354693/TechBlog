@@ -1,7 +1,6 @@
 package com.yc.controller;
 
 import com.yc.model.Blog;
-import com.yc.model.Comment;
 import com.yc.model.CommentAndUserCustom;
 import com.yc.model.User;
 import com.yc.service.BlogService;
@@ -49,6 +48,7 @@ public class BlogController {
             commentAndUser.setCommentLikeNum(commentLikeNum);
         }
 
+        model.addAttribute("topTen", blogService.getTopTenBlog());
         model.addAttribute("headPicPath", headPicPath);
         model.addAttribute("blog", blog);
         model.addAttribute("commentNum", commentNum);
@@ -70,6 +70,7 @@ public class BlogController {
             return "success";
         }
     }
+
 
 
 }

@@ -24,4 +24,8 @@
     <update id="updateBlogReadNum" parameterType="integer">
         update blog set blog_read_num=blog_read_num+1 where blog_id=#{blogId}
     </update>
+
+    <select id="getTopTenBlogByReadNum" resultMap="baseColumn">
+        select blog_id,blog_title from blog order by blog_read_num desc limit 0,10
+    </select>
 </mapper>

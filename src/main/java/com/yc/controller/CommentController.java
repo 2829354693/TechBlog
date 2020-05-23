@@ -36,5 +36,17 @@ public class CommentController {
         return new CommentAndUserCustom(headPicPath, commentContent, nowDate, user.getId(), user.getHeadPic(), user.getName());
     }
 
+    @PostMapping("/commentLike")
+    @ResponseBody
+    public String commentLike(HttpSession session, Integer commentId) throws Exception{
+        User user = (User) session.getAttribute("user");
+        if (commentService.isUserAlreadyLikeComment(commentId, user.getId())){
+            return "alreadyLike";
+        }else {
+            commentService.addCommentLike(commentId, user.getId());
+            return "success";
+        }
+    }
+
 
 }

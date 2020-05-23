@@ -96,40 +96,104 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <c:if test="${blogAndUsers.size()==0}">
-                    <p>还没人发布此类型的博客呢，快去发布吧！(^_^)</p>
-                </c:if>
-                <c:forEach items="${blogAndUsers}" var="item">
-                    <div class="blog-item">
-                        <div class="blog-title-pre">
-                            <a href="${pageContext.request.contextPath}/blog/detail?blogId=${item.blogId}">${item.title}</a>
+                <c:if test="${pageInfo!=null}">
+                    <c:forEach items="${pageInfo.list}" var="item">
+                        <div class="blog-item">
+                            <div class="blog-title-pre">
+                                <a href="${pageContext.request.contextPath}/blog/detail?blogId=${item.blogId}">${item.title}</a>
+                            </div>
+                            <div class="blog-user-head-pre">
+                                <img src="//${headPicPath}/${item.headPic}" alt="用户头像" width="70" height="70" style="margin-top: -25px">
+                            </div>
+                            <div class="blog-user-name-pre">
+                                <a href="">${item.name}</a>
+                            </div>
+                            <div class="item-foot">
+                                <div class="blog-type-pre">
+                                    <p>类型：${item.type}</p>
+                                </div>
+                                <div class="blog-time-pre">
+                                    <p><fmt:formatDate value="${item.publishTime}" type="both" dateStyle="medium" timeStyle="medium"/></p>
+                                </div>
+                                <div class="blog-comment-pre">
+                                    评论(${item.commentNum})
+                                </div>
+                                <div class="blog-read-pre">
+                                    阅读(${item.readNum})
+                                </div>
+                                <div class="blog-like-pre">
+                                    点赞(${item.likeNum})
+                                </div>
+                            </div>
                         </div>
-                        <div class="blog-user-head-pre">
-                            <img src="//${headPicPath}/${item.headPic}" alt="用户头像" width="70" height="70" style="margin-top: -25px">
-                        </div>
-                        <div class="blog-user-name-pre">
-                            <a href="">${item.name}</a>
-                        </div>
-                        <div class="item-foot">
-                            <div class="blog-type-pre">
-                                <p>类型：${item.type}</p>
-                            </div>
-                            <div class="blog-time-pre">
-                                <p><fmt:formatDate value="${item.publishTime}" type="both" dateStyle="medium" timeStyle="medium"/></p>
-                            </div>
-                            <div class="blog-comment-pre">
-                                评论(${item.commentNum})
-                            </div>
-                            <div class="blog-read-pre">
-                                阅读(${item.readNum})
-                            </div>
-                            <div class="blog-like-pre">
-                                点赞(${item.likeNum})
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
 
+                    <c:if test="${pageInfo.total>5}">
+                        <div>
+                            <ul style="width: 500px; margin: auto;">
+                                <c:if test="${pageInfo.pageNum!=1 }">
+                                    <a href="${pageContext.request.contextPath}/?pageIndex=${pageInfo.pageNum-1 }" style="text-decoration: none;">
+                                        <button
+                                                type="button" class="layui-btn layui-btn-primary layui-btn-sm">
+                                            <i class="layui-icon">&#xe603;</i>
+                                        </button>
+                                    </a>
+                                </c:if>
+                                <c:forEach begin="1" end="${pageInfo.pages }" varStatus="status">
+                                    <a href="${pageContext.request.contextPath}/?pageIndex=${status.count }" style="text-decoration: none;">
+                                        <button type="button"
+                                                class="layui-btn layui-btn-primary layui-btn-sm">${status.count }</button>
+                                    </a>
+                                </c:forEach>
+                                <c:if test="${pageInfo.pageNum!=pageInfo.pages }">
+                                    <a href="${pageContext.request.contextPath}/?pageIndex=${pageInfo.pageNum+1 }" style="text-decoration: none;">
+                                        <button
+                                                type="button" class="layui-btn layui-btn-primary layui-btn-sm">
+                                            <i class="layui-icon">&#xe602;</i>
+                                        </button>
+                                    </a>
+                                </c:if>
+
+                            </ul>
+                        </div>
+                    </c:if>
+                </c:if>
+
+                <c:if test="${pageInfo==null}">
+                    <c:if test="${blogAndUsers.size()==0}">
+                        <p>未找到符合条件的博客呢，快去发布吧！(^_^)</p>
+                    </c:if>
+                    <c:forEach items="${blogAndUsers}" var="item">
+                        <div class="blog-item">
+                            <div class="blog-title-pre">
+                                <a href="${pageContext.request.contextPath}/blog/detail?blogId=${item.blogId}">${item.title}</a>
+                            </div>
+                            <div class="blog-user-head-pre">
+                                <img src="//${headPicPath}/${item.headPic}" alt="用户头像" width="70" height="70" style="margin-top: -25px">
+                            </div>
+                            <div class="blog-user-name-pre">
+                                <a href="">${item.name}</a>
+                            </div>
+                            <div class="item-foot">
+                                <div class="blog-type-pre">
+                                    <p>类型：${item.type}</p>
+                                </div>
+                                <div class="blog-time-pre">
+                                    <p><fmt:formatDate value="${item.publishTime}" type="both" dateStyle="medium" timeStyle="medium"/></p>
+                                </div>
+                                <div class="blog-comment-pre">
+                                    评论(${item.commentNum})
+                                </div>
+                                <div class="blog-read-pre">
+                                    阅读(${item.readNum})
+                                </div>
+                                <div class="blog-like-pre">
+                                    点赞(${item.likeNum})
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:if>
             </div>
             <div class="layui-tab-item">内容2</div>
             <div class="layui-tab-item">内容3</div>
@@ -140,78 +204,16 @@
         <div class="blog-ranking-head">
             <p>-热度排行榜-</p>
         </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #ef0d0d;">
-                    <p class="blog-ranking-num-div-p">1</p>
+        <c:forEach items="${topTen}" var="blog" varStatus="index">
+            <div class="blog-ranking-num">
+                <div style="line-height: 3.5;">
+                    <div class="blog-ranking-num-div" style="background: #ef0d0d;">
+                        <p class="blog-ranking-num-div-p">${index.index+1}</p>
+                    </div>
+                    <p class="blog-ranking-num-p"><a href="${pageContext.request.contextPath}/blog/detail?blogId=${blog.id}">${blog.title}</a></p>
                 </div>
-                <p class="blog-ranking-num-p"><a href="">不要把异常当不要把异常当做业务做业务做做业务逻辑...</a></p>
             </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #2b84e3;">
-                    <p class="blog-ranking-num-div-p">2</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当做业务逻辑要把异常当做业务逻辑</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #f9bc7c;">
-                    <p class="blog-ranking-num-div-p">3</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当不要把异常当做业务做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">4</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当不要把异常当做业务做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">5</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常不要把异常当做业务当做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">6</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常不要把异常当做业务当做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">7</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当不要把异常当做业务做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">8</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当做不要把异常当做业务业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">9</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当做业务逻辑不要把异常当做业务...</p>
-            </div>
-        </div>
+        </c:forEach>
 
     </div>
 </div>

@@ -8,6 +8,8 @@ import java.util.List;
 public interface BlogService {
     void insertBlog(Blog blog) throws Exception;
 
+    List<BlogAndUserCustom> getPageBlogAndUser(Integer pageIndex, Integer pageSize) throws Exception;
+
     List<BlogAndUserCustom> getTenBlogAndUser() throws Exception;
 
     List<BlogAndUserCustom> getTenBlogAndUserByType(String type) throws Exception;
@@ -25,4 +27,6 @@ public interface BlogService {
     boolean isUserAlreadyLikeBlog(Integer blogId, Integer userId) throws Exception;
 
     void addBlogLikeNum(Integer blogId, Integer userId) throws Exception;
+
+    List<Blog> getTopTenBlog() throws Exception;
 }

@@ -1,6 +1,5 @@
 package com.yc.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.yc.model.Blog;
 import com.yc.model.BlogAndUserCustom;
 import com.yc.model.User;
@@ -80,7 +79,6 @@ public class UserController {
 
             userService.addUser(regUser);
 
-//            session.setAttribute("user", regUser);
             return "success";
         }else {
             return "accountExist";

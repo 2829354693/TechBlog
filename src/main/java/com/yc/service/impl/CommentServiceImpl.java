@@ -42,4 +42,17 @@ public class CommentServiceImpl implements CommentService {
     public void addComment(Comment comment) throws Exception {
         commentMapper.addComment(comment);
     }
+
+    @Override
+    public boolean isUserAlreadyLikeComment(Integer commentId, Integer userId) throws Exception {
+        Integer commentLikeNum = commentLikeMapper.getCommentLikeNumByCommentIdAndUserId(commentId, userId);
+
+        return commentLikeNum != 0;
+
+    }
+
+    @Override
+    public void addCommentLike(Integer commentId, Integer userId) throws Exception {
+        commentLikeMapper.addCommentLike(commentId, userId);
+    }
 }

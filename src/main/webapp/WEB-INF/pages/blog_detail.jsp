@@ -30,9 +30,12 @@
         <div class="read-footer">
             <div style="float: left;"><fmt:formatDate value="${blog.time}" type="both"/></div>
             <div style="float: right;">阅读(${blog.readNum})</div>
-            <div style="float: right;"><button type="button" onclick="blogLike()">赞</button>点赞(<p id="blogLikeNum">${blogLikeNum}</p>
-<%--                <input type="text" id="blogLikeNum" value="${blogLikeNum}" style="border: none;width: auto">--%>
-                )</div>
+            <div style="float: right;">
+                <button type="button" onclick="blogLike()">赞</button>
+                点赞(<p id="blogLikeNum">${blogLikeNum}</p>
+                <%--                <input type="text" id="blogLikeNum" value="${blogLikeNum}" style="border: none;width: auto">--%>
+                )
+            </div>
             <div style="float: right;">评论(${commentNum})</div>
         </div>
 
@@ -50,150 +53,91 @@
 
         <div class="blog-read-comment">
             <c:forEach items="${allComment}" var="comment">
-                <div class="comment-item">
-                    <div>
-                        <img src="//${headPicPath}/${comment.headPic}" alt="头像" width="70" height="70">
-                    </div>
-                    <div>
-                        <p><a href="">${comment.username}</a></p>
-                    </div>
-                    <div>
-                        <p>${comment.commentContent}</p>
-                    </div>
-                    <div>
-                        <p><fmt:formatDate value="${comment.commentTime}" type="both"/></p>
-                    </div>
-                    <div>
-                        <p>点赞(${comment.commentLikeNum})</p>
-                    </div>
+            <div class="comment-item">
+                <div>
+                    <img src="//${headPicPath}/${comment.headPic}" alt="头像" width="70" height="70">
                 </div>
+                <div>
+                    <p><a href="">${comment.username}</a></p>
+                </div>
+                <div>
+                    <p>${comment.commentContent}</p>
+                </div>
+                <div>
+                    <p><fmt:formatDate value="${comment.commentTime}" type="both"/></p>
+                </div>
+                <div>
+                    <button type="button" onclick="commentLike(${comment.commentId},this)">赞</button>
+                        点赞(
+                    <p>${comment.commentLikeNum}</p>
+                    )
+                </div>
+            </div>
             </c:forEach>
         </div>
-    </div>
 
+    </div>
 
     <div class="main-right">
         <div class="blog-ranking-head">
             <p>-热度排行榜-</p>
         </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #ef0d0d;">
-                    <p class="blog-ranking-num-div-p">1</p>
+        <c:forEach items="${topTen}" var="blog" varStatus="index">
+            <div class="blog-ranking-num">
+                <div style="line-height: 3.5;">
+                    <div class="blog-ranking-num-div" style="background: #ef0d0d;">
+                        <p class="blog-ranking-num-div-p">${index.index+1}</p>
+                    </div>
+                    <p class="blog-ranking-num-p"><a href="${pageContext.request.contextPath}/blog/detail?blogId=${blog.id}">${blog.title}</a></p>
                 </div>
-                <p class="blog-ranking-num-p"><a href="">不要把异常当不要把异常当做业务做业务做做业务逻辑...</a></p>
             </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #2b84e3;">
-                    <p class="blog-ranking-num-div-p">2</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当做业务逻辑要把异常当做业务逻辑</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #f9bc7c;">
-                    <p class="blog-ranking-num-div-p">3</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当不要把异常当做业务做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">4</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当不要把异常当做业务做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">5</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常不要把异常当做业务当做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">6</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常不要把异常当做业务当做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">7</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当不要把异常当做业务做业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">8</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当做不要把异常当做业务业务逻辑...</p>
-            </div>
-        </div>
-        <div class="blog-ranking-num">
-            <div style="line-height: 3.5;">
-                <div class="blog-ranking-num-div" style="background: #aca9a9;">
-                    <p class="blog-ranking-num-div-p">9</p>
-                </div>
-                <p class="blog-ranking-num-p">不要把异常当做业务逻辑不要把异常当做业务...</p>
-            </div>
-        </div>
+        </c:forEach>
 
     </div>
 </div>
 
 </body>
 <script type="text/javascript">
-    layui.use(['jquery','layer'],function () {
-        var $=layui.jquery;
-        var layer=layui.layer;
+    layui.use(['jquery', 'layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
 
-        window.comment=function () {
-            if (${empty sessionScope.user}){
+        window.comment = function () {
+            if (${empty sessionScope.user}) {
                 layer.confirm('您还未登录，是否前往登录页面？', {
                     btn: ['去登录', '取消']
                 }, function () {
                     location.href = "../user/login";
                 });
-            }else {
+            } else {
                 var commentContent = $("#comment_input").val();
                 var blogId = '${blog.id}';
                 $.ajax({
-                    type:'post',
-                    url:'../comment/addComment',
-                    data:{"commentContent":commentContent,"blogId":blogId},
-                    success:function (result) {
-                        if (result!=null){
-                            var headPicPath=result.headPicPath;
-                            var headPic=result.headPic;
-                            var username=result.username;
-                            var commentContent=result.commentContent;
-                            var commentTime=result.commentTime;
-                            var cTime=new Date(commentTime).Format("yyyy-MM-dd HH:mm:ss");
+                    type: 'post',
+                    url: '../comment/addComment',
+                    data: {"commentContent": commentContent, "blogId": blogId},
+                    success: function (result) {
+                        if (result != null) {
+                            var headPicPath = result.headPicPath;
+                            var headPic = result.headPic;
+                            var username = result.username;
+                            var commentContent = result.commentContent;
+                            var commentTime = result.commentTime;
+                            var cTime = new Date(commentTime).Format("yyyy-MM-dd HH:mm:ss");
 
                             var text = "";
                             text += "<div class=\"comment-item\">";
                             text += "                    <div>";
-                            text += "                        <img src=\"//"+headPicPath+"/"+headPic+"\" alt=\"头像\" width=\"70\" height=\"70\">";
+                            text += "                        <img src=\"//" + headPicPath + "/" + headPic + "\" alt=\"头像\" width=\"70\" height=\"70\">";
                             text += "                    </div>";
                             text += "                    <div>";
-                            text += "                        <p><a href=\"\">"+username+"</a></p>";
+                            text += "                        <p><a href=\"\">" + username + "</a></p>";
                             text += "                    </div>";
                             text += "                    <div>";
-                            text += "                        <p>"+commentContent+"</p>";
+                            text += "                        <p>" + commentContent + "</p>";
                             text += "                    </div>";
                             text += "                    <div>";
-                            text += "                        <p>"+cTime+"</p>";
+                            text += "                        <p>" + cTime + "</p>";
                             text += "                    </div>";
                             text += "                    <div>";
                             text += "                        <p>点赞(0)</p>";
@@ -214,26 +158,26 @@
 
         };
 
-        window.blogLike=function () {
-            if (${empty sessionScope.user}){
+        window.blogLike = function () {
+            if (${empty sessionScope.user}) {
                 layer.confirm('您还未登录，登陆后可点赞评论', {
                     btn: ['去登录', '取消']
                 }, function () {
                     location.href = "../user/login";
                 });
-            }else {
-                var blogId='${blog.id}';
+            } else {
+                var blogId = '${blog.id}';
 
                 $.ajax({
                     type: 'post',
                     url: '../blog/blogLike',
-                    data: {"blogId":blogId},
-                    success:function (result) {
-                        if (result==="alreadyLike"){
+                    data: {"blogId": blogId},
+                    success: function (result) {
+                        if (result === "alreadyLike") {
                             layer.msg("您已赞过此博客！");
-                        }else if (result==="success"){
+                        } else if (result === "success") {
                             var blogLikeNum = $("#blogLikeNum").text();
-                            var newBlogLikeNum = parseInt(blogLikeNum)+1;
+                            var newBlogLikeNum = parseInt(blogLikeNum) + 1;
                             $("#blogLikeNum").text(newBlogLikeNum);
                             layer.msg("点赞成功！");
                         }
@@ -243,24 +187,48 @@
             }
         };
 
+        window.commentLike = function (commentId,obj) {
+            if (${empty sessionScope.user}) {
+                layer.confirm('您还未登录，登陆后可点赞评论', {
+                    btn: ['去登录', '取消']
+                }, function () {
+                    location.href = "../user/login";
+                });
+            } else {
+                $.ajax({
+                    type:'post',
+                    url:'../comment/commentLike',
+                    data:{"commentId":commentId},
+                    success:function (result) {
+                        if (result==="alreadyLike"){
+                            layer.msg("您已赞过此评论！");
+                        }else if (result==="success"){
+                            var commentLikeNum = $(obj).next("p").text();
+                            var newcommentLikeNum = parseInt(commentLikeNum) + 1;
+                            $(obj).next("p").text(newcommentLikeNum);
+                            layer.msg("点赞成功！");
+                        }
+                    }
+                });
+            }
+        };
     });
 
-    Date.prototype.Format = function(fmt)
-    {
+    Date.prototype.Format = function (fmt) {
         var o = {
-            "M+" : this.getMonth()+1,                 //月份
-            "d+" : this.getDate(),                    //日
-            "H+" : this.getHours(),                   //小时
-            "m+" : this.getMinutes(),                 //分
-            "s+" : this.getSeconds(),                 //秒
-            "q+" : Math.floor((this.getMonth()+3)/3), //季度
-            "S"  : this.getMilliseconds()             //毫秒
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "H+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
         };
-        if(/(y+)/.test(fmt))
-            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-        for(var k in o)
-            if(new RegExp("("+ k +")").test(fmt))
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     };
 </script>

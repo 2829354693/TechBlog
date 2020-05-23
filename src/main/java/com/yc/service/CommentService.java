@@ -13,4 +13,8 @@ public interface CommentService {
     Integer getCommentLikeNumByCommentId(Integer commentId) throws Exception;
 
     void addComment(Comment comment) throws Exception;
+
+    boolean isUserAlreadyLikeComment(Integer commentId, Integer userId) throws Exception;
+
+    void addCommentLike(Integer commentId, Integer userId) throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.yc.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.yc.mapper.BlogAndUserCustomMapper;
 import com.yc.mapper.BlogLikeMapper;
 import com.yc.mapper.BlogMapper;
@@ -31,6 +32,12 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void insertBlog(Blog blog) throws Exception {
         blogMapper.insertBlog(blog);
+    }
+
+    @Override
+    public List<BlogAndUserCustom> getPageBlogAndUser(Integer pageIndex, Integer pageSize) throws Exception {
+        PageHelper.startPage(pageIndex, pageSize);
+        return blogAndUserCustomMapper.getAllBlogAndUser();
     }
 
     @Override
@@ -78,5 +85,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void addBlogLikeNum(Integer blogId, Integer userId) throws Exception {
         blogLikeMapper.addBlogLikeNum(blogId, userId);
+    }
+
+    @Override
+    public List<Blog> getTopTenBlog() throws Exception {
+        return blogMapper.getTopTenBlogByReadNum();
     }
 }

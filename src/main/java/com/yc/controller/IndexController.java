@@ -1,9 +1,9 @@
 package com.yc.controller;
 
 
+import com.github.pagehelper.PageInfo;
 import com.yc.model.BlogAndUserCustom;
 import com.yc.service.BlogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
@@ -26,10 +26,11 @@ public class IndexController {
     BlogService blogService;
 
     @RequestMapping("/")
-    public String indexPage(HttpSession session, Model model) throws Exception{
+    public String indexPage(HttpSession session, Model model, Integer pageIndex) throws Exception{
         model.addAttribute("headPicPath", headPicPath);
 
-        List<BlogAndUserCustom> blogAndUsers = blogService.getTenBlogAndUser();
+        Integer pageIndexEx = pageIndex == null?1:pageIndex;
+        List<BlogAndUserCustom> blogAndUsers = blogService.getPageBlogAndUser(pageIndexEx, 5);
 
         for (BlogAndUserCustom blogAndUser : blogAndUsers) {
             Integer commentNum = blogService.getCommentNumByBlogId(blogAndUser.getBlogId());
@@ -38,7 +39,9 @@ public class IndexController {
             blogAndUser.setLikeNum(blogLikeNum);
         }
 
-        model.addAttribute("blogAndUsers", blogAndUsers);
+        PageInfo<BlogAndUserCustom> pageInfo = new PageInfo<>(blogAndUsers);
+        model.addAttribute("topTen", blogService.getTopTenBlog());
+        model.addAttribute("pageInfo", pageInfo);
 
         return "index";
     }
@@ -56,6 +59,7 @@ public class IndexController {
             blogAndUserCustom.setLikeNum(blogLikeNum);
         }
 
+        model.addAttribute("topTen", blogService.getTopTenBlog());
         model.addAttribute("blogAndUsers", tenBlogAndUserByType);
 
         return "index";

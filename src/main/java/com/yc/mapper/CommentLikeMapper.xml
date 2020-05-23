@@ -11,4 +11,11 @@
         select count(*) from comment_like where comment_id=#{commentId}
     </select>
 
+    <select id="getCommentLikeNumByCommentIdAndUserId" parameterType="integer" resultType="integer">
+        select count(*) from comment_like where comment_id=#{param1} and user_id=#{param2}
+    </select>
+
+    <insert id="addCommentLike" parameterType="integer">
+        insert into comment_like(user_id, comment_id) VALUES (#{param2},#{param1})
+    </insert>
 </mapper>
