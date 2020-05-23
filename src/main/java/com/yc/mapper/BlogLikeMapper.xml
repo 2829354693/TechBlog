@@ -11,4 +11,11 @@
         select count(*) from blog_like where blog_id=#{blogId}
     </select>
 
+    <select id="getBlogLikeNumByBlogIdAndUserId" parameterType="integer" resultType="integer">
+        select count(*) from blog_like where blog_id=#{param1} and user_id=#{param2}
+    </select>
+
+    <insert id="addBlogLikeNum" parameterType="integer">
+        insert into blog_like(user_id, blog_id) VALUES (#{param2},#{param1})
+    </insert>
 </mapper>

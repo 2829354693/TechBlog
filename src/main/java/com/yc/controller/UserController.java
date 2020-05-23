@@ -1,5 +1,6 @@
 package com.yc.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.yc.model.Blog;
 import com.yc.model.BlogAndUserCustom;
 import com.yc.model.User;
@@ -170,13 +171,20 @@ public class UserController {
     
     //首页模糊查询博客(zh)
     @PostMapping("/filterBlog")
-    public String filterBlog(String titlePart){
-        System.out.println(titlePart);
+    public String filterBlog(String titlePart, Model model) throws Exception {
+
         List<BlogAndUserCustom> blogSearched = blogService.getBlogbyFuzzyFilter(titlePart);
-        for (BlogAndUserCustom result:blogSearched){
-            System.out.println(result.getBlogId()+result.getTitle());
+
+        for (BlogAndUserCustom blogAndUserCustom : blogSearched) {
+            Integer commentNum = blogService.getCommentNumByBlogId(blogAndUserCustom.getBlogId());
+            blogAndUserCustom.setCommentNum(commentNum);
+            Integer blogLikeNum = blogService.getBlogLikeNumByBlogId(blogAndUserCustom.getBlogId());
+            blogAndUserCustom.setLikeNum(blogLikeNum);
         }
-        return "redirect:/";
+
+        model.addAttribute("headPicPath", headPicPath);
+        model.addAttribute("blogAndUsers", blogSearched);
+        return "index";
     }
 
 

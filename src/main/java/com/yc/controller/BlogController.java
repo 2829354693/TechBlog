@@ -3,6 +3,7 @@ package com.yc.controller;
 import com.yc.model.Blog;
 import com.yc.model.Comment;
 import com.yc.model.CommentAndUserCustom;
+import com.yc.model.User;
 import com.yc.service.BlogService;
 import com.yc.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -52,6 +56,19 @@ public class BlogController {
         model.addAttribute("allComment", commentAndUsers);
 
         return "blog_detail";
+    }
+
+    @PostMapping("/blogLike")
+    @ResponseBody
+    public String blogLike(HttpSession session, Integer blogId) throws Exception{
+        User user = (User) session.getAttribute("user");
+
+        if (blogService.isUserAlreadyLikeBlog(blogId, user.getId())){
+            return "alreadyLike";
+        }else {
+            blogService.addBlogLikeNum(blogId, user.getId());
+            return "success";
+        }
     }
 
 

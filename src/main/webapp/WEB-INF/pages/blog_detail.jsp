@@ -30,7 +30,9 @@
         <div class="read-footer">
             <div style="float: left;"><fmt:formatDate value="${blog.time}" type="both"/></div>
             <div style="float: right;">阅读(${blog.readNum})</div>
-            <div style="float: right;">点赞(${blogLikeNum})</div>
+            <div style="float: right;"><button type="button" onclick="blogLike()">赞</button>点赞(<p id="blogLikeNum">${blogLikeNum}</p>
+<%--                <input type="text" id="blogLikeNum" value="${blogLikeNum}" style="border: none;width: auto">--%>
+                )</div>
             <div style="float: right;">评论(${commentNum})</div>
         </div>
 
@@ -212,7 +214,34 @@
 
         };
 
+        window.blogLike=function () {
+            if (${empty sessionScope.user}){
+                layer.confirm('您还未登录，登陆后可点赞评论', {
+                    btn: ['去登录', '取消']
+                }, function () {
+                    location.href = "../user/login";
+                });
+            }else {
+                var blogId='${blog.id}';
 
+                $.ajax({
+                    type: 'post',
+                    url: '../blog/blogLike',
+                    data: {"blogId":blogId},
+                    success:function (result) {
+                        if (result==="alreadyLike"){
+                            layer.msg("您已赞过此博客！");
+                        }else if (result==="success"){
+                            var blogLikeNum = $("#blogLikeNum").text();
+                            var newBlogLikeNum = parseInt(blogLikeNum)+1;
+                            $("#blogLikeNum").text(newBlogLikeNum);
+                            layer.msg("点赞成功！");
+                        }
+                    }
+
+                });
+            }
+        };
 
     });
 

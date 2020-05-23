@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <title>tech blog</title>
-    <link href="./static/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/static/css/style.css" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
@@ -25,63 +25,63 @@
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=编程语言">编程语言</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=编程语言">编程语言</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=算法">算法</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=算法">算法</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=web开发">web开发</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=web开发">web开发</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=小程序开发">小程序开发</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=小程序开发">小程序开发</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=操作系统">操作系统</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=操作系统">操作系统</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=数据库">数据库</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=数据库">数据库</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=网络">网络</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=网络">网络</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=Linux">Linux</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=Linux">Linux</a>
                     </h2>
                 </div>
             </li>
             <li>
                 <div class="jq22-list-wrap-box">
                     <h2>
-                        <img src="static/images/leftitem.jpg" alt=""><a href="./byType?type=分布式">分布式</a>
+                        <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a href="./byType?type=分布式">分布式</a>
                     </h2>
                 </div>
             </li>
