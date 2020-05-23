@@ -19,4 +19,6 @@ public interface BlogService {
     void updateBlogReadNum(Integer blogId) throws Exception;
 
     Blog getBlogByBlogId(Integer blogId) throws Exception;
+    
+    List<BlogAndUserCustom> getBlogbyFuzzyFilter(String titlePart); //zh
 }
