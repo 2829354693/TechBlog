@@ -62,4 +62,10 @@ public class BlogServiceImpl implements BlogService {
     public Blog getBlogByBlogId(Integer blogId) throws Exception {
         return blogMapper.getBlogByBlogId(blogId);
     }
+    
+    //模糊查询（zh）
+    @Override
+    public List<BlogAndUserCustom> getBlogbyFuzzyFilter(String titlePart){
+        return blogAndUserCustomMapper.getBlogbyFuzzyFilter(titlePart);
+    }
 }
