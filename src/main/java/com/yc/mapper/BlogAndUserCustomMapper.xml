@@ -23,5 +23,10 @@
     <select id="getAllBlogByUserId" parameterType="integer" resultMap="blogAndUserCustom">
         select * from blog, blog_user where blog.user_id=#{userId} and blog.user_id=blog_user.user_id
     </select>
+    
+    //首页博客模糊查询（zh）
+    <select id="getBlogbyFuzzyFilter" parameterType="java.lang.String" resultMap="blogAndUserCustom">
+        select * from blog, blog_user where blog.blog_title like "%"#{titlePart}"%" and blog.user_id=blog_user.user_id
+    </select>
 
 </mapper>
