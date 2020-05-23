@@ -167,6 +167,17 @@ public class UserController {
         model.addAttribute("blogAndUsers", allBlogByUserId);
         return "user/user_blog";
     }
+    
+    //首页模糊查询博客(zh)
+    @PostMapping("/filterBlog")
+    public String filterBlog(String titlePart){
+        System.out.println(titlePart);
+        List<BlogAndUserCustom> blogSearched = blogService.getBlogbyFuzzyFilter(titlePart);
+        for (BlogAndUserCustom result:blogSearched){
+            System.out.println(result.getBlogId()+result.getTitle());
+        }
+        return "redirect:/";
+    }
 
 
 }
