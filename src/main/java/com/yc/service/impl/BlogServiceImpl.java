@@ -116,4 +116,9 @@ public class BlogServiceImpl implements BlogService {
         }
         return commentInfos;
     }
+
+    @Override
+    public void deleteBlog(Integer blogId) throws Exception {
+        blogMapper.deleteBlog(blogId);
+    }
 }

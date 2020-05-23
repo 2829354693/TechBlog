@@ -90,8 +90,8 @@
     <div class="layui-tab" style="width: 700px;float: left;margin-left: 10px">
         <ul class="layui-tab-title">
             <li class="layui-this"><a href="${pageContext.request.contextPath}/">首页</a></li>
-            <li>我赞</li>
-            <li>我评</li>
+            <li><p id="myLike">我赞</p></li>
+            <li><p id="myComment">我评</p></li>
             <li>随便看看</li>
         </ul>
         <div class="layui-tab-content">
@@ -103,7 +103,7 @@
                                 <a href="${pageContext.request.contextPath}/blog/detail?blogId=${item.blogId}">${item.title}</a>
                             </div>
                             <div class="blog-user-head-pre">
-                                <img src="//${headPicPath}/${item.headPic}" alt="用户头像" width="70" height="70" style="margin-top: -25px">
+                                <img src="//${headPicPath}/${item.headPic}" onerror="this.src='./static/img/default.jpg'" alt="用户头像" width="70" height="70" style="margin-top: -25px">
                             </div>
                             <div class="blog-user-name-pre">
                                 <a href="">${item.name}</a>
@@ -169,7 +169,7 @@
                                 <a href="${pageContext.request.contextPath}/blog/detail?blogId=${item.blogId}">${item.title}</a>
                             </div>
                             <div class="blog-user-head-pre">
-                                <img src="//${headPicPath}/${item.headPic}" alt="用户头像" width="70" height="70" style="margin-top: -25px">
+                                <img src="//${headPicPath}/${item.headPic}" onerror="this.src='./static/img/default.jpg'" alt="用户头像" width="70" height="70" style="margin-top: -25px">
                             </div>
                             <div class="blog-user-name-pre">
                                 <a href="">${item.name}</a>
@@ -195,9 +195,9 @@
                     </c:forEach>
                 </c:if>
             </div>
-            <div class="layui-tab-item">内容2</div>
-            <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item"></div>
+            <div class="layui-tab-item"></div>
+            <div class="layui-tab-item">待开发</div>
         </div>
     </div>
     <div class="main-right">
@@ -229,23 +229,29 @@
         var element = layui.element;
         var $ = layui.jquery;
 
-        // var content = $("#content").val();
-        // console.log(content);
-        //
-        // $("#content").val(content.replace(/<[^>]+>/g,""));
+        $("#myLike").click(function () {
+            if (${empty sessionScope.user}) {
+                layer.confirm('您还未登录，是否前往登录页面？', {
+                    btn: ['去登录', '取消']
+                }, function () {
+                    location.href = "./user/login";
+                });
+            } else {
+                location.href='./blog/myBlogLike';
+            }
+        });
 
-        <%--var num = '${num}';--%>
-
-        <%--console.log(num);--%>
-
-        <%--var array = new Array();--%>
-        <%--var i = 0;--%>
-        <%--for (i; i < num; i++) {--%>
-        <%--    array.push('${blogAndUsers.get(0).content}');--%>
-        <%--    var a = '${blogAndUsers.remove(0)}';--%>
-        <%--}--%>
-
-        <%--console.log(array);--%>
+        $("#myComment").click(function () {
+            if (${empty sessionScope.user}) {
+                layer.confirm('您还未登录，是否前往登录页面？', {
+                    btn: ['去登录', '取消']
+                }, function () {
+                    location.href = "./user/login";
+                });
+            } else {
+                location.href='./blog/myBlogComment';
+            }
+        });
 
         $("#self").click(function () {
             if (${empty sessionScope.user}) {
@@ -257,8 +263,6 @@
             } else {
                 location.href='./user/userCenter';
             }
-
-
         });
     });
 

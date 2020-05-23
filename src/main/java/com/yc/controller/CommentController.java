@@ -48,5 +48,11 @@ public class CommentController {
         }
     }
 
+    @PostMapping("/deleteComment")
+    @ResponseBody
+    public String deleteComment(Integer commentId) throws Exception{
+        commentService.deleteComment(commentId);
+        return "success";
+    }
 
 }

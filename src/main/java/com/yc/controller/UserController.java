@@ -136,7 +136,7 @@ public class UserController {
 
     @PostMapping("/submitBlog")
     @ResponseBody
-    public String submitBlog(HttpSession session, Blog blog) throws Exception{
+    public String submitBlog(HttpSession session, Blog blog, MultipartFile upfile) throws Exception{
         User user =(User) session.getAttribute("user");
 
         blog.setTime(new Date());
@@ -165,24 +165,6 @@ public class UserController {
         model.addAttribute("headPicPath", headPicPath);
         model.addAttribute("blogAndUsers", allBlogByUserId);
         return "user/user_blog";
-    }
-    
-    //首页模糊查询博客(zh)
-    @PostMapping("/filterBlog")
-    public String filterBlog(String titlePart, Model model) throws Exception {
-
-        List<BlogAndUserCustom> blogSearched = blogService.getBlogbyFuzzyFilter(titlePart);
-
-        for (BlogAndUserCustom blogAndUserCustom : blogSearched) {
-            Integer commentNum = blogService.getCommentNumByBlogId(blogAndUserCustom.getBlogId());
-            blogAndUserCustom.setCommentNum(commentNum);
-            Integer blogLikeNum = blogService.getBlogLikeNumByBlogId(blogAndUserCustom.getBlogId());
-            blogAndUserCustom.setLikeNum(blogLikeNum);
-        }
-
-        model.addAttribute("headPicPath", headPicPath);
-        model.addAttribute("blogAndUsers", blogSearched);
-        return "index";
     }
 
 

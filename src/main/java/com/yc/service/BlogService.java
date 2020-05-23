@@ -33,4 +33,6 @@ public interface BlogService {
     List<BlogAndUserCustom> getBlogLikeByUserId(Integer userId) throws Exception;
 
     List<BlogAndUserCustom> getAllCommentByUserId(Integer userId) throws Exception;
+
+    void deleteBlog(Integer blogId) throws Exception;
 }

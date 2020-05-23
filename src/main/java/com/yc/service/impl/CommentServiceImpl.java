@@ -55,4 +55,9 @@ public class CommentServiceImpl implements CommentService {
     public void addCommentLike(Integer commentId, Integer userId) throws Exception {
         commentLikeMapper.addCommentLike(commentId, userId);
     }
+
+    @Override
+    public void deleteComment(Integer commentId) throws Exception {
+        commentMapper.deleteComment(commentId);
+    }
 }

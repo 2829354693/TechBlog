@@ -138,7 +138,7 @@
                 });
             }else {
                 var c = $("#iframe1")[0].contentWindow.getContent();
-                console.log(c.replace(/<\/?.+?>/g, ""));
+
                 var title = $("#title").val();
                 var type = $("#type option:selected").val();
 

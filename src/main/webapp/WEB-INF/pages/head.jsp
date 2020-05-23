@@ -43,7 +43,7 @@
             </dl>
         </div>
         <div class="search-header">
-            <form class="layui-form" action="${pageContext.request.contextPath}/user/filterBlog" method="post">
+            <form class="layui-form" action="${pageContext.request.contextPath}/filterBlog" method="post">
                 <div class="layui-form-item">
                     <ul style="width: 270px;">
                         <li style="float: left;">

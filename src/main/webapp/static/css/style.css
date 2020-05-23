@@ -74,9 +74,7 @@ a:hover {
 .blog-read-main{
     width: 850px;
     overflow: hidden;
-    border: 1px solid grey;
-    float: left;
-
+    padding: 25px;
 }
 
 .title-font{
@@ -86,30 +84,73 @@ a:hover {
 }
 
 .read-footer{
+    display: flex;
+    justify-content: space-between;
     height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+.read-footer-item {
+    cursor: pointer;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 5px;
 }
 .blog-read-comment{
     width: 800px;
     overflow: hidden;
-
-    border: 1px solid grey;
 }
 
 .blog-read-content{
     margin-bottom: 20px;
 }
 
-.comment-item{
+.comment-submit {
+    display: block;
+    margin: 10px auto;
+    padding: 0 18px;
+    height: 38px;
+    line-height: 38px;
+    width: 100px;
+    color: #FFFFFF;
+    background: #436cac;
+    border: none;
+    border-radius: 5px;
+}
 
-    margin-bottom: 20px;
-    border: 1px solid grey;
+.comment-item{
+    margin: 10px 0 20px;
+    padding: 15px 10px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+}
+.comment-header {
+    height: 50px;
+}
+.comment-img {
+    float: left;
+    border-radius: 50%;
+    border: 1px solid #dddddd;
+    margin-right: 10px;
+}
+.comment-username {
+    font-size: 16px;
+    line-height: 20px;
+}
+.comment-time {
+    line-height: 20px;
+}
+.comment-content {
+    padding: 10px 0;
+}
+.comment-btn {
+    cursor: pointer;
+    width: 50px;
+    /*float: right;*/
 }
 
 .comment-input{
-
-    margin-bottom: 20px;
-
-    border: 1px solid grey;
+    margin: 20px 0;
 }
 
 
@@ -142,7 +183,6 @@ a:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 230px;
     margin-left: 20px;
 }
 
@@ -150,13 +190,12 @@ a:hover {
 .blog-ranking-num-div {
     width: 20px;
     height: 20px;
+    margin-right: 5px;
     color: white;
-    margin-top: 15px;
     float: left;
-    margin-left: 20px;
     font-weight: bold;
     line-height: 1;
-    margin-right: 5px;
+    margin-top: 15px;
 }
 
 .blog-ranking-num-div-p {
@@ -167,7 +206,7 @@ a:hover {
 
 .blog-ranking-num {
     height: 50px;
-    border-bottom: 1px solid #dedbdb;
+    padding: 15px;
 }
 
 .blog-ranking-head {
@@ -260,7 +299,19 @@ a:hover {
     float: right;
     margin-right: 10px;
 }
-
+.delete-blog{
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-top: -70px;
+    color: #0000ab;
+    text-decoration: underline;
+}
+.delete-comment{
+    cursor: pointer;
+    color: #0000ab;
+    text-decoration: underline;
+}
 
 .blog-item {
     width: auto;
@@ -282,12 +333,11 @@ a:hover {
 }
 
 .main-right {
-    width: 290px;
-    position: relative;
-    margin-left: 20px;
+    width: 300px;
+    margin-right: 20px;
     margin-top: 10px;
-    float: left;
-    background: white;
+    padding-left: 30px;
+    border-left: solid 2px #dddddd;
 }
 
 .search-header {
@@ -487,12 +537,13 @@ a:hover {
 }
 
 .jq22-list-item {
+    display: flex;
+    justify-content: space-between;
     width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
     position: relative;
     height: auto;
     overflow: hidden;
-    background: #f8f8f8;
 }
 
 .jq22-list-wrap {

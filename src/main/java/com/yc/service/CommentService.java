@@ -17,4 +17,6 @@ public interface CommentService {
     boolean isUserAlreadyLikeComment(Integer commentId, Integer userId) throws Exception;
 
     void addCommentLike(Integer commentId, Integer userId) throws Exception;
+
+    void deleteComment(Integer commentId) throws Exception;
 }

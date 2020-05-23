@@ -98,5 +98,12 @@ public class BlogController {
         model.addAttribute("blogAndUsers", blogInfos);
         return "user/user_mycomment";
     }
+
+    @RequestMapping("/deleteBlog")
+    @ResponseBody
+    public String deleteBlog(Integer blogId) throws Exception{
+        blogService.deleteBlog(blogId);
+        return "success";
+    }
 }
 

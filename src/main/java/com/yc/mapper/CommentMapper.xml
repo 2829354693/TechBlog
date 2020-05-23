@@ -25,4 +25,8 @@
     <select id="getAllCommentByUserId" parameterType="integer" resultMap="baseColumn">
         select * from blog_comment where user_id=#{userId}
     </select>
+
+    <delete id="deleteComment" parameterType="integer">
+        delete from blog_comment where comment_id=#{commentId}
+    </delete>
 </mapper>

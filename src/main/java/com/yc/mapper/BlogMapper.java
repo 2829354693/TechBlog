@@ -15,4 +15,5 @@ public interface BlogMapper {
 
     List<Blog> getTopTenBlogByReadNum() throws Exception;
 
+    void deleteBlog(Integer blogId) throws Exception;
 }

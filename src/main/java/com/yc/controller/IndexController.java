@@ -9,6 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -65,4 +66,21 @@ public class IndexController {
         return "index";
     }
 
+    //首页模糊查询博客(zh)
+    @PostMapping("/filterBlog")
+    public String filterBlog(String titlePart, Model model) throws Exception {
+
+        List<BlogAndUserCustom> blogSearched = blogService.getBlogbyFuzzyFilter(titlePart);
+
+        for (BlogAndUserCustom blogAndUserCustom : blogSearched) {
+            Integer commentNum = blogService.getCommentNumByBlogId(blogAndUserCustom.getBlogId());
+            blogAndUserCustom.setCommentNum(commentNum);
+            Integer blogLikeNum = blogService.getBlogLikeNumByBlogId(blogAndUserCustom.getBlogId());
+            blogAndUserCustom.setLikeNum(blogLikeNum);
+        }
+
+        model.addAttribute("headPicPath", headPicPath);
+        model.addAttribute("blogAndUsers", blogSearched);
+        return "index";
+    }
 }

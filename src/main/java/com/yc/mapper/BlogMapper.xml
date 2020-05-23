@@ -28,4 +28,8 @@
     <select id="getTopTenBlogByReadNum" resultMap="baseColumn">
         select blog_id,blog_title from blog order by blog_read_num desc limit 0,10
     </select>
+
+    <delete id="deleteBlog" parameterType="integer">
+        delete from blog where blog_id=#{blogId}
+    </delete>
 </mapper>
