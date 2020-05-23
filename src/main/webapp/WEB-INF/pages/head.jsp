@@ -43,14 +43,14 @@
             </dl>
         </div>
         <div class="search-header">
-            <form class="layui-form" action="">
+            <form class="layui-form" action="user/filterBlog" method="post">
                 <div class="layui-form-item">
                     <ul style="width: 270px;">
                         <li style="float: left;">
-                            <input type="text" placeholder="搜索博客" name="" class="layui-input">
+                            <input type="text" placeholder="搜索博客" name="titlePart" class="layui-input">
                         </li>
                         <li>
-                            <button type="button" class="layui-btn layui-btn-primary">搜索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary">搜索</button>
                         </li>
                     </ul>
                 </div>
