@@ -7,11 +7,14 @@ import com.yc.mapper.BlogMapper;
 import com.yc.mapper.CommentMapper;
 import com.yc.model.Blog;
 import com.yc.model.BlogAndUserCustom;
+import com.yc.model.BlogLike;
+import com.yc.model.Comment;
 import com.yc.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -90,5 +93,27 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> getTopTenBlog() throws Exception {
         return blogMapper.getTopTenBlogByReadNum();
+    }
+
+    @Override
+    public List<BlogAndUserCustom> getBlogLikeByUserId(Integer userId) throws Exception{
+        List<BlogLike> blogLikes =  blogLikeMapper.getBlogLikeByUserId(userId);
+        List<BlogAndUserCustom> blogLikeInfos = new ArrayList<>();
+        for (BlogLike blog:blogLikes){
+            BlogAndUserCustom blogInfo = blogAndUserCustomMapper.getInfoByBlogId(blog.getBlogId());
+            blogLikeInfos.add(blogInfo);
+        }
+        return blogLikeInfos;
+    }
+
+    @Override
+    public List<BlogAndUserCustom> getAllCommentByUserId(Integer userId) throws Exception{
+        List<Comment> comments =  commentMapper.getAllCommentByUserId(userId);
+        List<BlogAndUserCustom> commentInfos = new ArrayList<>();
+        for (Comment comment:comments){
+            BlogAndUserCustom commentInfo = blogAndUserCustomMapper.getInfoByBlogId(comment.getBlogId());
+            commentInfos.add(commentInfo);
+        }
+        return commentInfos;
     }
 }

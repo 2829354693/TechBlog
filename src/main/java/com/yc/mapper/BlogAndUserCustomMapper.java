@@ -16,4 +16,6 @@ public interface BlogAndUserCustomMapper {
     List<BlogAndUserCustom> getBlogbyFuzzyFilter(String titlePart); //zh
 
     List<BlogAndUserCustom> getAllBlogAndUser() throws Exception;
+
+    BlogAndUserCustom getInfoByBlogId(Integer blogId);
 }

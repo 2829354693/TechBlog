@@ -18,4 +18,8 @@
     <insert id="addBlogLikeNum" parameterType="integer">
         insert into blog_like(user_id, blog_id) VALUES (#{param2},#{param1})
     </insert>
+
+    <select id="getBlogLikeByUserId" parameterType="integer" resultMap="baseColumn">
+        select * from blog_like where user_id=#{userId}
+    </select>
 </mapper>

@@ -29,4 +29,8 @@ public interface BlogService {
     void addBlogLikeNum(Integer blogId, Integer userId) throws Exception;
 
     List<Blog> getTopTenBlog() throws Exception;
+
+    List<BlogAndUserCustom> getBlogLikeByUserId(Integer userId) throws Exception;
+
+    List<BlogAndUserCustom> getAllCommentByUserId(Integer userId) throws Exception;
 }

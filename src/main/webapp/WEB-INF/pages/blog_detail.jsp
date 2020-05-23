@@ -102,6 +102,18 @@
         var $ = layui.jquery;
         var layer = layui.layer;
 
+        $("#self").click(function () {
+            if (${empty sessionScope.user}) {
+                layer.confirm('您还未登录，是否前往登录页面？', {
+                    btn: ['去登录', '取消']
+                }, function () {
+                    location.href = "../user/login";
+                });
+            } else {
+                location.href = '../user/userCenter';
+            }
+        });
+
         window.comment = function () {
             if (${empty sessionScope.user}) {
                 layer.confirm('您还未登录，是否前往登录页面？', {

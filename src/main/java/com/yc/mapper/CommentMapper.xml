@@ -21,4 +21,8 @@
         insert into blog_comment(comment_content, comment_time, user_id, blog_id)
         VALUES(#{content},#{time},#{userId},#{blogId})
     </insert>
+
+    <select id="getAllCommentByUserId" parameterType="integer" resultMap="baseColumn">
+        select * from blog_comment where user_id=#{userId}
+    </select>
 </mapper>

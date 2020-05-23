@@ -12,4 +12,6 @@ public interface CommentMapper {
     List<Comment> getAllCommentByBlogId(Integer blogId) throws Exception;
 
     void addComment(Comment comment) throws Exception;
+
+    List<Comment> getAllCommentByUserId(Integer userId) throws Exception;
 }

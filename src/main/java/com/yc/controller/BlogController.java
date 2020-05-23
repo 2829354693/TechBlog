@@ -1,6 +1,7 @@
 package com.yc.controller;
 
 import com.yc.model.Blog;
+import com.yc.model.BlogAndUserCustom;
 import com.yc.model.CommentAndUserCustom;
 import com.yc.model.User;
 import com.yc.service.BlogService;
@@ -33,7 +34,7 @@ public class BlogController {
     CommentService commentService;
 
     @GetMapping("/detail")
-    public String detail(Integer blogId, Model model) throws Exception{
+    public String detail(Integer blogId, Model model) throws Exception {
         blogService.updateBlogReadNum(blogId);
 
         Blog blog = blogService.getBlogByBlogId(blogId);
@@ -60,17 +61,42 @@ public class BlogController {
 
     @PostMapping("/blogLike")
     @ResponseBody
-    public String blogLike(HttpSession session, Integer blogId) throws Exception{
+    public String blogLike(HttpSession session, Integer blogId) throws Exception {
         User user = (User) session.getAttribute("user");
 
-        if (blogService.isUserAlreadyLikeBlog(blogId, user.getId())){
+        if (blogService.isUserAlreadyLikeBlog(blogId, user.getId())) {
             return "alreadyLike";
-        }else {
+        } else {
             blogService.addBlogLikeNum(blogId, user.getId());
             return "success";
         }
     }
 
+    @RequestMapping("/myBlogLike")
+    public String myBlogLike(HttpSession session, Model model) throws Exception {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "error";
+        }
 
+        List<BlogAndUserCustom> blogInfos = blogService.getBlogLikeByUserId(user.getId());
 
+        model.addAttribute("headPicPath", headPicPath);
+        model.addAttribute("blogAndUsers", blogInfos);
+        return "user/user_mylike";
+    }
+
+    @RequestMapping("/myBlogComment")
+    public String myBlogComment(HttpSession session, Model model) throws Exception {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "error";
+        }
+        List<BlogAndUserCustom> blogInfos = blogService.getAllCommentByUserId(user.getId());
+
+        model.addAttribute("headPicPath", headPicPath);
+        model.addAttribute("blogAndUsers", blogInfos);
+        return "user/user_mycomment";
+    }
 }
+

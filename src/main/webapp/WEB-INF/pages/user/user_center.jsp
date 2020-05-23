@@ -43,7 +43,7 @@
                 <div class="jq22-list-wrap-box">
                     <h2>
                         <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a
-                            href="#">我评论的</a>
+                            href="${pageContext.request.contextPath}/blog/myBlogComment">我评论的</a>
                     </h2>
                 </div>
             </li>
@@ -51,7 +51,7 @@
                 <div class="jq22-list-wrap-box">
                     <h2>
                         <img src="${pageContext.request.contextPath}/static/images/leftitem.jpg" alt=""><a
-                            href="#">我点赞的</a>
+                            href="${pageContext.request.contextPath}/blog/myBlogLike">我点赞的</a>
                     </h2>
                 </div>
             </li>
@@ -147,10 +147,10 @@
                 layer.confirm('您还未登录，是否前往登录页面？', {
                     btn: ['去登录', '取消']
                 }, function () {
-                    location.href = "./login";
+                    location.href = "../user/login";
                 });
             } else {
-                location.href = './userCenter';
+                location.href = '../user/userCenter';
             }
         });
 

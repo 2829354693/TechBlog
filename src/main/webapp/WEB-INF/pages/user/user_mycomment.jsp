@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 28293
-  Date: 2020/5/22
-  Time: 16:02
+  Date: 2020/5/23
+  Time: 16:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -66,9 +66,9 @@
     </div>
 
     <div class="user-main" style="width: 1000px;margin-left: 5px;">
-        <h2>我发布的博客：</h2>
+        <h2>我评论过的博客：</h2>
         <c:if test="${blogAndUsers.size()==0}">
-            <p>您还未发布博客呢，快去发布吧！(^_^)</p>
+            <p>您还未评论博客呢，快去评论吧！(^_^)</p>
         </c:if>
         <c:forEach items="${blogAndUsers}" var="item">
             <div class="blog-item">

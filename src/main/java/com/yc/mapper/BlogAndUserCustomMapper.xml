@@ -32,4 +32,8 @@
     <select id="getAllBlogAndUser" resultMap="blogAndUserCustom">
         select * from blog, blog_user where blog.user_id=blog_user.user_id
     </select>
+
+    <select id="getInfoByBlogId" parameterType="integer" resultMap="blogAndUserCustom">
+        select * from blog,blog_user where blog.blog_id=#{blogId} and blog.user_id=blog_user.user_id
+    </select>
 </mapper>
