@@ -26,5 +26,6 @@
         <property name="maxUploadSizePerFile" value="5242880"/>
     </bean>
 
+    <bean class="com.yc.exception.CustomExceptionResolver"/>
 
 </beans>

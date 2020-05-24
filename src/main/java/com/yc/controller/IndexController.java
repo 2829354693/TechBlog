@@ -79,6 +79,7 @@ public class IndexController {
             blogAndUserCustom.setLikeNum(blogLikeNum);
         }
 
+        model.addAttribute("topTen", blogService.getTopTenBlog());
         model.addAttribute("headPicPath", headPicPath);
         model.addAttribute("blogAndUsers", blogSearched);
         return "index";
