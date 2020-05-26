@@ -15,4 +15,6 @@ public interface UserService {
     void updateUser(User updateUser) throws Exception;
 
     List<BlogAndUserCustom> getAllBlogByUserId(Integer userId) throws Exception;
+
+    User getUserByUserId(Integer userId) throws Exception;
 }

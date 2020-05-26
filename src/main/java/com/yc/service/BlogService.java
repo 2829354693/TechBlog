@@ -12,6 +12,8 @@ public interface BlogService {
 
     List<BlogAndUserCustom> getTenBlogAndUser() throws Exception;
 
+    List<BlogAndUserCustom> getAllBlogAndUserByUserId(Integer userId) throws Exception;
+
     List<BlogAndUserCustom> getTenBlogAndUserByType(String type) throws Exception;
 
     Integer getCommentNumByBlogId(Integer blogId) throws Exception;
@@ -35,4 +37,6 @@ public interface BlogService {
     List<BlogAndUserCustom> getAllCommentByUserId(Integer userId) throws Exception;
 
     void deleteBlog(Integer blogId) throws Exception;
+
+    List<BlogAndUserCustom> addCommentAndLikeNum(List<BlogAndUserCustom> blogAndUserCustoms) throws Exception;
 }

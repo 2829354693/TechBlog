@@ -53,7 +53,7 @@
                 <div class="comment-item">
                     <div class="comment-header">
                         <img class="comment-img" src="//${headPicPath}/${comment.headPic}" onerror="this.src='../static/img/default.jpg'" alt="头像" width="40" height="40">
-                        <p class="comment-username"><a href="">${comment.username}</a></p>
+                        <p class="comment-username"><a href="${pageContext.request.contextPath}/user/blogerHome?userId=${comment.userId}">${comment.username}</a></p>
                         <p class="comment-time"><fmt:formatDate value="${comment.commentTime}" type="both"/></p>
                     </div>
                     <div class="comment-content">

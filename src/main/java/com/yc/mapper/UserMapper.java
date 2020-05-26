@@ -14,4 +14,5 @@ public interface UserMapper {
 
     void updateUser(User user) throws Exception;
 
+    User getUserByUserId(Integer userId) throws Exception;
 }

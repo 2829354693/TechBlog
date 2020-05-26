@@ -49,6 +49,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public List<BlogAndUserCustom> getAllBlogAndUserByUserId(Integer userId) throws Exception {
+        return blogAndUserCustomMapper.getAllBlogByUserId(userId);
+    }
+
+    @Override
     public List<BlogAndUserCustom> getTenBlogAndUserByType(String type) throws Exception {
         return blogAndUserCustomMapper.getTenBlogAndUserByType(type);
     }
@@ -101,7 +106,9 @@ public class BlogServiceImpl implements BlogService {
         List<BlogAndUserCustom> blogLikeInfos = new ArrayList<>();
         for (BlogLike blog:blogLikes){
             BlogAndUserCustom blogInfo = blogAndUserCustomMapper.getInfoByBlogId(blog.getBlogId());
-            blogLikeInfos.add(blogInfo);
+            if (blogInfo != null) {
+                blogLikeInfos.add(blogInfo);
+            }
         }
         return blogLikeInfos;
     }
@@ -112,7 +119,9 @@ public class BlogServiceImpl implements BlogService {
         List<BlogAndUserCustom> commentInfos = new ArrayList<>();
         for (Comment comment:comments){
             BlogAndUserCustom commentInfo = blogAndUserCustomMapper.getInfoByBlogId(comment.getBlogId());
-            commentInfos.add(commentInfo);
+            if (commentInfo != null) {
+                commentInfos.add(commentInfo);
+            }
         }
         return commentInfos;
     }
@@ -120,5 +129,16 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void deleteBlog(Integer blogId) throws Exception {
         blogMapper.deleteBlog(blogId);
+    }
+
+    @Override
+    public List<BlogAndUserCustom> addCommentAndLikeNum(List<BlogAndUserCustom> blogAndUserCustoms) throws Exception {
+        for (BlogAndUserCustom blogAndUserCustom : blogAndUserCustoms) {
+            Integer commentNum = getCommentNumByBlogId(blogAndUserCustom.getBlogId());
+            blogAndUserCustom.setCommentNum(commentNum);
+            Integer blogLikeNum = getBlogLikeNumByBlogId(blogAndUserCustom.getBlogId());
+            blogAndUserCustom.setLikeNum(blogLikeNum);
+        }
+        return blogAndUserCustoms;
     }
 }

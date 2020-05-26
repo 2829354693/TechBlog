@@ -34,5 +34,8 @@
         where user_id=#{id}
     </update>
 
+    <select id="getUserByUserId" parameterType="integer" resultMap="baseColumn">
+        select * from blog_user where user_id=#{userId}
+    </select>
 
 </mapper>

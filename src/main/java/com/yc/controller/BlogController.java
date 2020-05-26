@@ -82,7 +82,7 @@ public class BlogController {
         List<BlogAndUserCustom> blogInfos = blogService.getBlogLikeByUserId(user.getId());
 
         model.addAttribute("headPicPath", headPicPath);
-        model.addAttribute("blogAndUsers", blogInfos);
+        model.addAttribute("blogAndUsers", blogService.addCommentAndLikeNum(blogInfos));
         return "user/user_mylike";
     }
 
@@ -95,7 +95,7 @@ public class BlogController {
         List<BlogAndUserCustom> blogInfos = blogService.getAllCommentByUserId(user.getId());
 
         model.addAttribute("headPicPath", headPicPath);
-        model.addAttribute("blogAndUsers", blogInfos);
+        model.addAttribute("blogAndUsers", blogService.addCommentAndLikeNum(blogInfos));
         return "user/user_mycomment";
     }
 

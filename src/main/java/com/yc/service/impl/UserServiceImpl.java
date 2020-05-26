@@ -46,5 +46,10 @@ public class UserServiceImpl implements UserService {
         return blogAndUserCustomMapper.getAllBlogByUserId(userId);
     }
 
+    @Override
+    public User getUserByUserId(Integer userId) throws Exception {
+        return userMapper.getUserByUserId(userId);
+    }
+
 
 }

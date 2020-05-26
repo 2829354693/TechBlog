@@ -167,5 +167,18 @@ public class UserController {
         return "user/user_blog";
     }
 
+    @RequestMapping("/blogerHome")
+    public String blogerHome(Integer userId, Model model) throws Exception{
+        User bloger = userService.getUserByUserId(userId);
+
+        List<BlogAndUserCustom> blogAndUserCustomList = blogService.getAllBlogAndUserByUserId(userId);
+
+        model.addAttribute("headPicPath", headPicPath);
+        model.addAttribute("bloger", bloger);
+        model.addAttribute("blogAndUserCustoms", blogService.addCommentAndLikeNum(blogAndUserCustomList));
+
+        return "user/other_user";
+    }
+
 
 }

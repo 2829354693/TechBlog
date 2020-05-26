@@ -27,20 +27,15 @@ public class IndexController {
     BlogService blogService;
 
     @RequestMapping("/")
-    public String indexPage(HttpSession session, Model model, Integer pageIndex) throws Exception{
+    public String indexPage(Model model, Integer pageIndex) throws Exception{
         model.addAttribute("headPicPath", headPicPath);
 
         Integer pageIndexEx = pageIndex == null?1:pageIndex;
         List<BlogAndUserCustom> blogAndUsers = blogService.getPageBlogAndUser(pageIndexEx, 5);
 
-        for (BlogAndUserCustom blogAndUser : blogAndUsers) {
-            Integer commentNum = blogService.getCommentNumByBlogId(blogAndUser.getBlogId());
-            blogAndUser.setCommentNum(commentNum);
-            Integer blogLikeNum = blogService.getBlogLikeNumByBlogId(blogAndUser.getBlogId());
-            blogAndUser.setLikeNum(blogLikeNum);
-        }
+        List<BlogAndUserCustom> blogAndUserCustoms = blogService.addCommentAndLikeNum(blogAndUsers);
 
-        PageInfo<BlogAndUserCustom> pageInfo = new PageInfo<>(blogAndUsers);
+        PageInfo<BlogAndUserCustom> pageInfo = new PageInfo<>(blogAndUserCustoms);
         model.addAttribute("topTen", blogService.getTopTenBlog());
         model.addAttribute("pageInfo", pageInfo);
 
@@ -53,15 +48,8 @@ public class IndexController {
 
         List<BlogAndUserCustom> tenBlogAndUserByType = blogService.getTenBlogAndUserByType(type);
 
-        for (BlogAndUserCustom blogAndUserCustom : tenBlogAndUserByType) {
-            Integer commentNum = blogService.getCommentNumByBlogId(blogAndUserCustom.getBlogId());
-            blogAndUserCustom.setCommentNum(commentNum);
-            Integer blogLikeNum = blogService.getBlogLikeNumByBlogId(blogAndUserCustom.getBlogId());
-            blogAndUserCustom.setLikeNum(blogLikeNum);
-        }
-
         model.addAttribute("topTen", blogService.getTopTenBlog());
-        model.addAttribute("blogAndUsers", tenBlogAndUserByType);
+        model.addAttribute("blogAndUsers", blogService.addCommentAndLikeNum(tenBlogAndUserByType));
 
         return "index";
     }
@@ -72,16 +60,9 @@ public class IndexController {
 
         List<BlogAndUserCustom> blogSearched = blogService.getBlogbyFuzzyFilter(titlePart);
 
-        for (BlogAndUserCustom blogAndUserCustom : blogSearched) {
-            Integer commentNum = blogService.getCommentNumByBlogId(blogAndUserCustom.getBlogId());
-            blogAndUserCustom.setCommentNum(commentNum);
-            Integer blogLikeNum = blogService.getBlogLikeNumByBlogId(blogAndUserCustom.getBlogId());
-            blogAndUserCustom.setLikeNum(blogLikeNum);
-        }
-
         model.addAttribute("topTen", blogService.getTopTenBlog());
         model.addAttribute("headPicPath", headPicPath);
-        model.addAttribute("blogAndUsers", blogSearched);
+        model.addAttribute("blogAndUsers", blogService.addCommentAndLikeNum(blogSearched));
         return "index";
     }
 }
