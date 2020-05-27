@@ -6,9 +6,12 @@ import com.yc.model.BlogAndUserCustom;
 import com.yc.model.User;
 import com.yc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -49,6 +52,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUserId(Integer userId) throws Exception {
         return userMapper.getUserByUserId(userId);
+    }
+
+    @Override
+    public void userLoginSuccess(HttpServletRequest request, HttpSession session, User user) throws Exception {
+        session.setAttribute("user", user);
     }
 
 

@@ -10,11 +10,13 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.Date;
@@ -44,12 +46,12 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String login(HttpSession session, User user) throws Exception{
+    public String login(HttpServletRequest request, HttpSession session, User user) throws Exception{
         if (userService.isUserEixst(user.getAccount())){
             List<User> users = userService.getUserByAccount(user.getAccount());
             SimpleHash simpleHash = new SimpleHash("md5", user.getPassword(), users.get(0).getSalt(), 5);
             if (users.get(0).getPassword().equals(simpleHash.toString())){
-                session.setAttribute("user", users.get(0));
+                userService.userLoginSuccess(request, session, users.get(0));
                 return "success";
             }else {
                 return "fail";
@@ -61,7 +63,7 @@ public class UserController {
 
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) throws Exception{
+    public String logout(HttpServletRequest request, HttpSession session) throws Exception{
         session.removeAttribute("user");
         return "redirect:/";
     }
@@ -136,7 +138,7 @@ public class UserController {
 
     @PostMapping("/submitBlog")
     @ResponseBody
-    public String submitBlog(HttpSession session, Blog blog, MultipartFile upfile) throws Exception{
+    public String submitBlog(HttpSession session, Blog blog) throws Exception{
         User user =(User) session.getAttribute("user");
 
         blog.setTime(new Date());

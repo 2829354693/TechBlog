@@ -21,64 +21,69 @@
 <jsp:include page="../head.jsp"/>
 
 <div class="jq22-list-item">
-    <ul style="margin: auto;">
-        <li style="margin: auto;margin-bottom: 50px;">
-            <div class="user-info-div">
-                <ul style="width: 300px;margin: auto">
-                    <li style="width: 70px;margin: auto">
-                        <div><img src="//${headPicPath}/${bloger.headPic}"
-                                  onerror="this.src='../static/img/default.jpg'" width="70" height="70" alt="头像" style="border-radius: 50%"></div>
-                    </li>
-                    <li style="text-align: center;font-weight: bold;color: #0f67b4;font-size: 20px;">
-                        <div>${bloger.name}</div>
-                    </li>
-                    <li style="text-align: center">
-                        <div>${bloger.signature}</div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <div>
-                <h2>发布的博客：</h2>
-                <c:if test="${blogAndUserCustoms.size()==0}">
-                    <p>此bloger还未发布博客呢！</p>
-                </c:if>
-                <c:forEach items="${blogAndUserCustoms}" var="item">
-                    <div class="blog-item">
-                        <div class="blog-title-pre">
-                            <a href="${pageContext.request.contextPath}/blog/detail?blogId=${item.blogId}">${item.title}</a>
+    <c:if test="${bloger == null}">
+        <h3>该博主已被删除！</h3>
+    </c:if>
+    <c:if test="${bloger != null}">
+        <ul style="margin: auto;">
+            <li style="margin: auto;margin-bottom: 50px;">
+                <div class="user-info-div">
+                    <ul style="width: 300px;margin: auto">
+                        <li style="width: 70px;margin: auto">
+                            <div><img src="//${headPicPath}/${bloger.headPic}"
+                                      onerror="this.src='../static/img/default.jpg'" width="70" height="70" alt="头像" style="border-radius: 50%"></div>
+                        </li>
+                        <li style="text-align: center;font-weight: bold;color: #0f67b4;font-size: 20px;">
+                            <div>${bloger.name}</div>
+                        </li>
+                        <li style="text-align: center">
+                            <div>${bloger.signature}</div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <h2>发布的博客：</h2>
+                    <c:if test="${blogAndUserCustoms.size()==0}">
+                        <p>此bloger还未发布博客呢！</p>
+                    </c:if>
+                    <c:forEach items="${blogAndUserCustoms}" var="item">
+                        <div class="blog-item">
+                            <div class="blog-title-pre">
+                                <a href="${pageContext.request.contextPath}/blog/detail?blogId=${item.blogId}">${item.title}</a>
+                            </div>
+                            <div class="blog-user-head-pre">
+                                <img src="//${headPicPath}/${item.headPic}" onerror="this.src='../static/img/default.jpg'"
+                                     alt="用户头像" width="70" height="70" style="margin-top: -25px;border-radius: 50%">
+                            </div>
+                            <div class="blog-user-name-pre">
+                                <a href="${pageContext.request.contextPath}/user/blogerHome?userId=${item.userId}">${item.name}</a>
+                            </div>
+                            <div class="item-foot">
+                                <div class="blog-type-pre">
+                                    <p>类型：${item.type}</p>
+                                </div>
+                                <div class="blog-time-pre">
+                                    <p><fmt:formatDate value="${item.publishTime}" type="both" dateStyle="medium"
+                                                       timeStyle="medium"/></p>
+                                </div>
+                                <div class="blog-comment-pre">
+                                    评论(${item.commentNum})
+                                </div>
+                                <div class="blog-read-pre">
+                                    阅读(${item.readNum})
+                                </div>
+                                <div class="blog-like-pre">
+                                    点赞(${item.likeNum})
+                                </div>
+                            </div>
                         </div>
-                        <div class="blog-user-head-pre">
-                            <img src="//${headPicPath}/${item.headPic}" onerror="this.src='../static/img/default.jpg'"
-                                 alt="用户头像" width="70" height="70" style="margin-top: -25px;border-radius: 50%">
-                        </div>
-                        <div class="blog-user-name-pre">
-                            <a href="${pageContext.request.contextPath}/user/blogerHome?userId=${item.userId}">${item.name}</a>
-                        </div>
-                        <div class="item-foot">
-                            <div class="blog-type-pre">
-                                <p>类型：${item.type}</p>
-                            </div>
-                            <div class="blog-time-pre">
-                                <p><fmt:formatDate value="${item.publishTime}" type="both" dateStyle="medium"
-                                                   timeStyle="medium"/></p>
-                            </div>
-                            <div class="blog-comment-pre">
-                                评论(${item.commentNum})
-                            </div>
-                            <div class="blog-read-pre">
-                                阅读(${item.readNum})
-                            </div>
-                            <div class="blog-like-pre">
-                                点赞(${item.likeNum})
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-        </li>
-    </ul>
+                    </c:forEach>
+                </div>
+            </li>
+        </ul>
+    </c:if>
 </div>
 
 </body>

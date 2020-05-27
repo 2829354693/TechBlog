@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yc.mapper.AdminMapper">
+    <resultMap id="baseColumn" type="com.yc.model.AdminUser">
+        <id column="admin_id" property="adminId"/>
+        <result column="admin_account" property="account"/>
+        <result column="admin_password" property="password"/>
+    </resultMap>
+
+    <select id="getAdminUserByAccount" parameterType="string" resultMap="baseColumn">
+        select * from admin_user where admin_account=#{account}
+    </select>
+
+    <select id="getUserByUsername" parameterType="string" resultMap="com.yc.mapper.UserMapper.baseColumn">
+        select * from blog_user where user_name like concat('%',#{username},'%')
+    </select>
+
+    <delete id="deleteUserByUserId" parameterType="integer">
+        delete from blog_user where user_id=#{userId}
+    </delete>
+
+    <update id="updateUserPassword">
+        update blog_user set user_password=#{param3},salt=#{param2} where user_id=#{param1}
+    </update>
+
+    <select id="getAllBlog" resultMap="com.yc.mapper.BlogMapper.baseColumn">
+        select * from blog
+    </select>
+
+    <select id="getBlogByTitle" parameterType="string" resultMap="com.yc.mapper.BlogMapper.baseColumn">
+        select * from blog where blog_title like concat('%',#{title},'%')
+    </select>
+</mapper>

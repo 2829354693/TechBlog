@@ -90,8 +90,8 @@
     <div class="layui-tab" style="width: 700px;float: left;margin-left: 10px">
         <ul class="layui-tab-title">
             <li class="layui-this"><a href="${pageContext.request.contextPath}/">首页</a></li>
-            <li><p id="myLike">我赞</p></li>
-            <li><p id="myComment">我评</p></li>
+            <li id="myLike"><p>我赞</p></li>
+            <li id="myComment"><p>我评</p></li>
             <li>随便看看</li>
         </ul>
         <div class="layui-tab-content">
@@ -106,7 +106,7 @@
                                 <img src="//${headPicPath}/${item.headPic}" onerror="this.src='./static/img/default.jpg'" alt="用户头像" width="70" height="70" style="margin-top: -25px">
                             </div>
                             <div class="blog-user-name-pre">
-                                <a href="">${item.name}</a>
+                                <a href="${pageContext.request.contextPath}/user/blogerHome?userId=${item.userId}">${item.name}</a>
                             </div>
                             <div class="item-foot">
                                 <div class="blog-type-pre">

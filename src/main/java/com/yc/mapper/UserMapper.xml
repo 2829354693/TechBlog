@@ -38,4 +38,7 @@
         select * from blog_user where user_id=#{userId}
     </select>
 
+    <select id="getAllUser" resultMap="baseColumn">
+        select * from blog_user
+    </select>
 </mapper>
